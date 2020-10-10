@@ -12,7 +12,7 @@ void change(int fd,int size)
     char * buf,* B;
     
     
-    buf = mmap(NULL,size,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);//由于要改变磁盘中的内容，所以映射的为共享对象
+    buf = mmap(NULL,size,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);//由于要改变磁盘中的内容，所以映射的为共享对象.
     
     if(buf < 0)//检测mmap是否调用成功
     {
