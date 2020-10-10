@@ -12,7 +12,7 @@ void change(int fd,int size)
     char * buf,* B;
     
     
-    buf = mmap(NULL,size,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);
+    buf = mmap(NULL,size,PROT_READ|PROT_WRITE,MAP_SHARED,fd,0);//由于要改变磁盘中的内容，所以映射的为共享对象
     
     if(buf < 0)//检测mmap是否调用成功
     {
@@ -30,7 +30,7 @@ void change(int fd,int size)
         }
     }
     /*
-    if(msync(buf,size,MS_ASYNC) < 0)
+    if(msync(buf,size,MS_ASYNC) < 0)//内存同步，对共享内容的改变并不直接写回到磁盘文件中，往往在调用munmap()后才执行该操作。可以通过调用msync()函数来实现磁盘文件内容与共享内存区中的内容一致,即同步操作.
     {
         printf("false!\n");
         printf("errno = %d\n",errno);
